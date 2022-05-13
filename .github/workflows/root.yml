@@ -53,3 +53,5 @@ jobs:
       - name: Run
         run: |
           echo "Here"
+          echo ${{ github.event.push }}
+          echo ${{ github.event.pull_request }}
