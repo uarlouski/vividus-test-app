@@ -16,29 +16,40 @@ on:
 jobs:
   saucelabs-upload-by-schedule:
     if: github.event.schedule
-    name: SauceLabs Storage Upload by Scheduler
-    uses: ./.github/workflows/saucelabs-upload.yml
-    with:
-      release-version: $RELEASE_VERSION
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test 1
+        run: |
+          echo 1
   
   android-ci:
     if: github.event.push || github.event.pull_request
-    name: Android App CI
-    uses: ./.github/workflows/android-ci.yml
-    with:
-      release-version: $RELEASE_VERSION
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test 2
+        run: |
+          echo 2
 
   ios-ci:
     if: github.event.push || github.event.pull_request
-    name: iOS App CI
-    uses: ./.github/workflows/ios-ci.yml
-    with:
-      release-version: $RELEASE_VERSION
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test 2
+        run: |
+          echo 2
   
   saucelabs-upload:
     if: github.ref == 'refs/heads/master' && !github.event.schedule
     needs: [ android-ci, ios-ci ]
-    name: SauceLabs Storage Upload
-    uses: ./.github/workflows/saucelabs-upload.yml
-    with:
-      release-version: $RELEASE_VERSION
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test 3
+        run: |
+          echo 3
+
+  simple:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run
+        run: |
+          echo "Here"
